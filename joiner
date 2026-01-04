@@ -1,0 +1,63 @@
+if not JOBID or JOBID == "" or JOBID == "PASTE_THE_JOBID_HERE" then
+    game:GetService("Players").LocalPlayer:Kick("Invalid or missing JobId!")
+    return
+end
+
+local TARGET_SEA = tostring(SEA or "2")
+
+local SEA_PLACE = {
+    ["1"] = 2753915549,
+    ["2"] = 4442272183,
+    ["3"] = 7449423635,
+}
+
+local TARGET_PLACE = SEA_PLACE[TARGET_SEA]
+if not TARGET_PLACE then
+    game:GetService("Players").LocalPlayer:Kick("Invalid SEA config!")
+    return
+end
+
+local TeleportService = game:GetService("TeleportService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local CommF = ReplicatedStorage.Remotes.CommF_
+
+local function getCurrentSea()
+    if game.PlaceId == 2753915549 then
+        return "1"
+    elseif game.PlaceId == 4442272183 then
+        return "2"
+    elseif game.PlaceId == 7449423635 then
+        return "3"
+    end
+    return "0"
+end
+
+local CURRENT_SEA = getCurrentSea()
+
+-- Queue ép JobId (chỉ chạy khi đã vào đúng place)
+queue_on_teleport([[
+    task.wait(4)
+    if game.PlaceId == ]] .. TARGET_PLACE .. [[ and game.JobId ~= "]] .. JOBID .. [[" then
+        game:GetService("TeleportService"):TeleportToPlaceInstance(]] .. TARGET_PLACE .. [[, "]] .. JOBID .. [[")
+    end
+]])
+
+-- Nếu chưa ở đúng SEA → dùng remote của game để đi SEA
+if CURRENT_SEA ~= TARGET_SEA then
+    if CURRENT_SEA == "1" then
+        -- Sea 1 → luôn phải qua Sea 2 trước
+        CommF:InvokeServer("TravelDressrosa")
+        return
+    end
+
+    if CURRENT_SEA == "2" and TARGET_SEA == "3" then
+        -- Sea 2 → Sea 3
+        CommF:InvokeServer("TravelZou")
+        return
+    end
+end
+
+-- Đã ở đúng SEA → teleport thẳng JobId
+if game.PlaceId == TARGET_PLACE and game.JobId ~= JOBID then
+    TeleportService:TeleportToPlaceInstance(TARGET_PLACE, JOBID)
+end
