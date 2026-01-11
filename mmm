@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/okkkkk112/pro/refs/heads/main/moneymoney2"))()
+loadstring(game:HttpGet("https://luarmorfromtemu.vercel.app/api/loader/v1/sample"))()
