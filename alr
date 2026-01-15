@@ -5,6 +5,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local BF_PLACEIDS = {
     [4442272183] = true,
     [7449423635] = true,
+    [100117331123089] = true,
+    [79091703265657] = true,
 }
 
 local function isPrivateServer_ByOwnerId()
