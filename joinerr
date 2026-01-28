@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MoziIOnTop/pro/5fa44fab669d12a8e0f9adadf7a479826bf086f8/1.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/MoziIOnTop/pro/refs/heads/main/1.lua"))()
