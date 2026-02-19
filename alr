@@ -22,7 +22,7 @@ local isPrivate = isPrivateServer_ByOwnerId()
 
 if isBFPlace and not isPrivate then
     -- Public server + đúng placeid
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/MoziIOnTop/pro/refs/heads/main/blox.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MoziIOnTop/pro/refs/heads/main/gpandjoiner"))()
 else
     -- Sai placeid OR đúng placeid nhưng private -> chạy key
     loadstring(game:HttpGet("https://raw.githubusercontent.com/okkkkk112/pro/refs/heads/main/key"))()
